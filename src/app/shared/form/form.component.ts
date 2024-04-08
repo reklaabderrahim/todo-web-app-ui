@@ -4,6 +4,7 @@ import {CommonModule, NgFor} from "@angular/common";
 import {Category} from "../model/category";
 import {FormType} from "../model/form-type";
 import {CrudOperation} from "../model/crud-operation";
+import {Task} from "../model/task";
 
 @Component({
   selector: 'app-form',
@@ -15,6 +16,8 @@ import {CrudOperation} from "../model/crud-operation";
 })
 export class FormComponent implements OnInit {
   form: FormGroup;
+  @Input() category: Category;
+  @Input() task: Task;
   @Output() formSubmit = new EventEmitter<any>();
   @Input() categories: Category[];
   @Input() type: FormType;
@@ -22,20 +25,24 @@ export class FormComponent implements OnInit {
   @Input() operation: CrudOperation;
   CrudOperation = CrudOperation;
 
+  // Toaster
+  @Input() isVisible: boolean = false;
+  @Input() message: string = 'error';
+
   constructor(private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      name: new FormControl({value: '', disabled: this.isReadOperation()}, Validators.required),
-      description: new FormControl({value: '', disabled: this.isReadOperation()}, Validators.required)
+      name: new FormControl({value: this.task ? this.task.name : this.category?.name, disabled: this.isReadOperation()}, Validators.required),
+      description: new FormControl({value: this.task ? this.task.description : this.category?.description, disabled: this.isReadOperation()}, Validators.required)
     });
     if (this.operation !== CrudOperation.create) {
-        this.form.addControl('id', new FormControl({value: null, disabled: true}, Validators.required));
+        this.form.addControl('id', new FormControl({value: this.task ? this.task.id : this.category?.id, disabled: true}, Validators.required));
     }
     if (this.type === FormType.task) {
-      this.form.addControl('deadline', new FormControl({value: '', disabled: this.isReadOperation()}, Validators.required));
-      this.form.addControl('category', new FormControl({value: '', disabled: this.isReadOperation()}, Validators.required));
+      this.form.addControl('deadline', new FormControl({value: this.task?.deadline, disabled: this.isReadOperation()}, Validators.required));
+      this.form.addControl('category', new FormControl({value: this.task?.category, disabled: this.isReadOperation()}, Validators.required));
     }
   }
 
@@ -44,6 +51,10 @@ export class FormComponent implements OnInit {
       this.formSubmit.emit(this.form.value);
       this.form.reset();
     }
+  }
+
+  trackByName(index: number, category: Category): string {
+    return category.name;
   }
 
   private isReadOperation(): boolean {

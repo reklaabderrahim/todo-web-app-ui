@@ -1,8 +1,10 @@
-import {ChangeDetectionStrategy, Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormComponent} from "../../../shared/form/form.component";
 import {AsyncPipe, CommonModule} from "@angular/common";
 import {FormType} from "../../../shared/model/form-type";
 import {CrudOperation} from "../../../shared/model/crud-operation";
+import {Category} from "../../../shared/model/category";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-category-detail',
@@ -13,16 +15,17 @@ import {CrudOperation} from "../../../shared/model/crud-operation";
     AsyncPipe
   ],
   templateUrl: './detail-category.component.html',
-  styleUrl: './detail-category.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './detail-category.component.css'
 })
-export class DetailCategoryComponent {
+export class DetailCategoryComponent implements OnInit {
+  category: Category;
   FormType = FormType;
+  protected readonly CrudOperation = CrudOperation;
 
-  onSubmit(formData: any) {
-    // Handle form submission here
-    console.log(formData);
+  constructor(private route: ActivatedRoute) {
   }
 
-  protected readonly CrudOperation = CrudOperation;
+  ngOnInit(): void {
+    this.category = this.route.snapshot.data['category'];
+  }
 }

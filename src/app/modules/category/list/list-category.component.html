@@ -3,7 +3,8 @@
     Create
   </button>
 </div>
-<table class="min-w-full divide-y divide-gray-200 mt-4">
+<div class="overflow-x-auto">
+  <table class="table-auto w-full divide-y divide-gray-200 mt-4">
   <thead>
   <tr>
     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
@@ -14,6 +15,8 @@
     </th>
     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
       Description
+    </th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
     </th>
     <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
     </th>
@@ -32,7 +35,10 @@
     <td class="px-6 py-4 whitespace-no-wrap">
       {{category.description}}
     </td>
-    <td routerLink="/categories/edit" class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
+    <td routerLink="/categories/detail/{{category.id}}" class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
+      detail
+    </td>
+    <td routerLink="/categories/edit/{{category.id}}" class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
       edit
     </td>
     <td (click)="delete(category.id)" class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
@@ -41,6 +47,11 @@
   </tr>
   </tbody>
 </table>
+</div>
+
+<div *ngIf="isVisible" class="mt-4 p-4 bg-red-800 text-white rounded shadow">
+  {{ message }}
+</div>
 
 
 

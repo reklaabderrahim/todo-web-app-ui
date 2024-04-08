@@ -1,5 +1,5 @@
-<app-form [categories]="categories$ | async"
+<app-form [categories]="categories"
           [type]="FormType.task"
-          [operation]="CrudOperation.read"
-          (formSubmit)="onSubmit($event)">
+          [task]="task"
+          [operation]="CrudOperation.read">
 </app-form>

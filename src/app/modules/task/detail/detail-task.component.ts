@@ -1,11 +1,11 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormComponent} from "../../../shared/form/form.component";
-import {CategoryService} from "../../../core/service/category.service";
-import {Observable} from "rxjs";
 import {Category} from "../../../shared/model/category";
 import {AsyncPipe, CommonModule} from "@angular/common";
 import {FormType} from "../../../shared/model/form-type";
 import {CrudOperation} from "../../../shared/model/crud-operation";
+import {ActivatedRoute} from "@angular/router";
+import {Task} from "../../../shared/model/task";
 
 @Component({
   selector: 'app-task-detail',
@@ -16,24 +16,19 @@ import {CrudOperation} from "../../../shared/model/crud-operation";
     AsyncPipe
   ],
   templateUrl: './detail-task.component.html',
-  styleUrl: './detail-task.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './detail-task.component.css'
 })
-export class DetailTaskComponent implements OnInit{
-
-  public categories$: Observable<Category[]>;
+export class DetailTaskComponent implements OnInit {
+  public categories: Category[] = [];
   FormType = FormType;
-  constructor(private categoryService: CategoryService) {
-  }
+  task: Task;
+  protected readonly CrudOperation = CrudOperation;
 
-  onSubmit(formData: any) {
-    // Handle form submission here
-    console.log(formData);
+  constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.categories$ = this.categoryService.getAllCategories();
+    this.task = this.route.snapshot.data['task'];
+    this.categories.push(this.task.category);
   }
-
-  protected readonly CrudOperation = CrudOperation;
 }

@@ -1,5 +1,7 @@
 <app-form [categories]="categories$ | async"
           [type]="FormType.task"
           [operation]="CrudOperation.create"
+          [isVisible]="isError"
+          [message]="message"
           (formSubmit)="onSubmit($event)">
 </app-form>

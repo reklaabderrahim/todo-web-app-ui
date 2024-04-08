@@ -1,58 +1,68 @@
 <div class="flex justify-end">
-  <button routerLink="/tasks/create" type="button" class="bg-blue-500 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+  <button routerLink="/tasks/create" type="button"
+          class="bg-blue-500 mr-2 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
     Create
   </button>
 </div>
-<table class="min-w-full divide-y divide-gray-200 mt-4">
-  <thead>
-  <tr>
-    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-      Id
-    </th>
-    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-      Name
-    </th>
-    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-      Description
-    </th>
-    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-      Deadline
-    </th>
-    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-      Category
-    </th>
-    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-    </th>
-    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-    </th>
-  </tr>
-  </thead>
-  <tbody class="bg-white divide-y divide-gray-200">
-  <tr *ngFor="let task of tasks$ | async">
-    <td class="px-6 py-4 whitespace-no-wrap">
-      {{task.id}}
-    </td>
-    <td class="px-6 py-4 whitespace-no-wrap">
-      {{task.name}}
-    </td>
-    <td class="px-6 py-4 whitespace-no-wrap">
-      {{task.description}}
-    </td>
-    <td class="px-6 py-4 whitespace-no-wrap">
-      {{task.deadline}}
-    </td>
-    <td class="px-6 py-4 whitespace-no-wrap">
-      {{task.category.name}}
-    </td>
-    <td routerLink="/tasks/edit" class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
-      edit
-    </td>
-    <td (click)="delete(task.id)" class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
-      delete
-    </td>
-  </tr>
-  </tbody>
-</table>
-
+<div class="overflow-x-auto">
+  <table class="table-auto w-full divide-y divide-gray-200 mt-4">
+    <thead>
+    <tr>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+        Id
+      </th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+        Name
+      </th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+        Description
+      </th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+        Deadline
+      </th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+        Category
+      </th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      </th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      </th>
+      <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      </th>
+    </tr>
+    </thead>
+    <tbody class="bg-white divide-y divide-gray-200">
+    <tr *ngFor="let task of tasks$ | async">
+      <td class="px-6 py-4 whitespace-no-wrap">
+        {{ task.id }}
+      </td>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        {{ task.name }}
+      </td>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        {{ task.description }}
+      </td>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        {{ task.deadline }}
+      </td>
+      <td class="px-6 py-4 whitespace-no-wrap">
+        {{ task.category.name }}
+      </td>
+      <td routerLink="/tasks/detail/{{task.id}}"
+          class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
+        detail
+      </td>
+      <td routerLink="/tasks/edit/{{task.id}}"
+          class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
+        edit
+      </td>
+      <td (click)="delete(task.id)"
+          class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
+        delete
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 
 

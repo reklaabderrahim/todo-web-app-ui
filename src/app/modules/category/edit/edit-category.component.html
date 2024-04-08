@@ -1,3 +1,6 @@
 <app-form [type]="FormType.category"
           [operation]="CrudOperation.update"
+          [category]="category"
+          [isVisible]="isError"
+          [message]="message"
           (formSubmit)="onSubmit($event)"></app-form>
