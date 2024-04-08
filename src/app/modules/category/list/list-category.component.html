@@ -1,0 +1,46 @@
+<div class="flex justify-end">
+  <button routerLink="/categories/create" type="button" class="bg-green-500 mr-2 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+    Create
+  </button>
+</div>
+<table class="min-w-full divide-y divide-gray-200 mt-4">
+  <thead>
+  <tr>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      Id
+    </th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      Name
+    </th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+      Description
+    </th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+    </th>
+    <th class="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+    </th>
+  </tr>
+  </thead>
+  <tbody class="bg-white divide-y divide-gray-200">
+  <tr *ngFor="let category of categories$ | async">
+    <td class="px-6 py-4 whitespace-no-wrap">
+      {{category.id}}
+    </td>
+    <td class="px-6 py-4 whitespace-no-wrap">
+      {{category.name}}
+    </td>
+    <td class="px-6 py-4 whitespace-no-wrap">
+      {{category.description}}
+    </td>
+    <td routerLink="/categories/edit" class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
+      edit
+    </td>
+    <td (click)="delete(category.id)" class="font-bold text-blue-500 hover:underline cursor-pointer px-6 py-4 whitespace-no-wrap">
+      delete
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+
