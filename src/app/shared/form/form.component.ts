@@ -35,7 +35,7 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.fb.group({
       name: new FormControl({value: this.task ? this.task.name : this.category?.name, disabled: this.isReadOperation()}, Validators.required),
-      description: new FormControl({value: this.task ? this.task.description : this.category?.description, disabled: this.isReadOperation()}, Validators.required)
+      description: new FormControl({value: this.task ? this.task.description : this.category?.description, disabled: this.isReadOperation()})
     });
     if (this.operation !== CrudOperation.create) {
         this.form.addControl('id', new FormControl({value: this.task ? this.task.id : this.category?.id, disabled: true}, Validators.required));
